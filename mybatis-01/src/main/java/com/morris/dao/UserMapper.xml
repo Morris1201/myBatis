@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=綁定一個對應的Dao/Mapper介面 -->
+<mapper namespace="com.morris.dao.UserDao">
+
+    <!-- select查詢語句 -->
+    <select id="getUserList" resultType="com.morris.pojo.User">
+        SELECT * FROM mybatis.user
+    </select>
+
+</mapper>

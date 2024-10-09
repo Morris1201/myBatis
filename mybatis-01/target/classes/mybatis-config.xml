@@ -2,7 +2,7 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!-- configurationæ ¸å¿ƒé…ç½®æ–‡ä»¶ -->
+<!-- configuration®Ö¤ß°t¸m¤å¥ó -->
 <configuration>
     <environments default="development">
         <environment id="development">
@@ -16,7 +16,7 @@
         </environment>
     </environments>
 
-    <!-- æ¯ä¸€å€‹Mapper.xmléƒ½éœ€è¦åœ¨Mybatisæ ¸å¿ƒé…ç½®æ–‡ä»¶ä¸­è¨»å†Š -->
+    <!-- ¨C¤@­ÓMapper.xml³£»Ý­n¦bMybatis®Ö¤ß°t¸m¤å¥ó¤¤µù¥U -->
     <mappers>
         <mapper resource="com/morris/dao/UserMapper.xml"/>
     </mappers>
