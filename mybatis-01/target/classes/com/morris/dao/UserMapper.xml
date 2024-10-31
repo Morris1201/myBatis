@@ -10,4 +10,20 @@
         SELECT * FROM mybatis.user
     </select>
 
+    <select id="getUserById" parameterType="int" resultType="com.morris.pojo.User">
+        SELECT * FROM mybatis.user WHERE id = #{id}
+    </select>
+
+    <!-- 對象中的屬性，可以直接取出來 -->
+    <insert id="addUser" parameterType="com.morris.pojo.User">
+        INSERT INTO mybatis.user (id, name, pwd) VALUES (#{id}, #{name}, #{pwd})
+    </insert>
+
+    <update id="updateUser" parameterType="com.morris.pojo.User">
+        UPDATE mybatis.user SET name = #{name}, pwd = #{pwd} WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM mybatis.user WHERE id = #{id}
+    </delete>
 </mapper>

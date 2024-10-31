@@ -13,4 +13,10 @@ public interface UserDao {
 
     // insert一個用戶
     int addUser(User user);
+
+    // 修改用戶
+    int updateUser(User user);
+
+    // 刪除一個用戶
+    int deleteUser(int id);
 }

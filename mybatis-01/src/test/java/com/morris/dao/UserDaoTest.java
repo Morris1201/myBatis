@@ -69,4 +69,44 @@ public class UserDaoTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void updateUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            int res = userDao.updateUser(new User(4, "修改人員4", "88998899"));
+            if(res > 0) {
+                System.out.println("修改成功");
+            }
+
+            sqlSession.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void deleteUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            int res = userDao.deleteUser(4);
+            if(res > 0) {
+                System.out.println("刪除成功");
+            }
+
+            sqlSession.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
 }
