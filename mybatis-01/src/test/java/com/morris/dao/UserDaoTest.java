@@ -5,7 +5,9 @@ import com.morris.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoTest {
 
@@ -49,6 +51,27 @@ public class UserDaoTest {
         }
     }
 
+    @Test
+    public void getUserByIdAndName(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", 1);
+            map.put("name", "陳一");
+
+            User user = userDao.getUserByIdAndName(map);
+            System.out.println(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
+
     // 增刪改需要提交事務
     @Test
     public void addUser(){
@@ -57,6 +80,32 @@ public class UserDaoTest {
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
             int res = userDao.addUser(new User(4, "人員4", "55665566"));
+            if(res > 0) {
+                System.out.println("新增成功");
+            }
+
+            sqlSession.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void addUser2(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", 4);
+            map.put("userName", "Map人員4");
+            map.put("userPwd", 555555);
+
+            int res = userDao.addUser2(map);
             if(res > 0) {
                 System.out.println("新增成功");
             }
@@ -102,6 +151,26 @@ public class UserDaoTest {
             }
 
             sqlSession.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void getUserLike(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+
+            List<User> userList = userDao.getUserLike("%李%");
+            for (User user : userList) {
+                System.out.println(user);
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }finally {
