@@ -32,4 +32,41 @@ public class UserDaoTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void getUserById(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            User user = userDao.getUserById(1);
+            System.out.println(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
+
+    // 增刪改需要提交事務
+    @Test
+    public void addUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            int res = userDao.addUser(new User(4, "人員4", "55665566"));
+            if(res > 0) {
+                System.out.println("新增成功");
+            }
+
+            sqlSession.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            // 關閉 SqlSession
+            sqlSession.close();
+        }
+    }
 }
