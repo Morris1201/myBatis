@@ -6,20 +6,20 @@
 <mapper namespace="com.morris.dao.UserDao">
 
     <!-- select查詢語句 -->
-    <select id="getUserList" resultType="com.morris.pojo.User">
+    <select id="getUserList" resultType="user">
         SELECT * FROM mybatis.user
     </select>
 
-    <select id="getUserById" parameterType="int" resultType="com.morris.pojo.User">
+    <select id="getUserById" parameterType="int" resultType="user">
         SELECT * FROM mybatis.user WHERE id = #{id}
     </select>
 
-    <select id="getUserByIdAndName" parameterType="map" resultType="com.morris.pojo.User">
+    <select id="getUserByIdAndName" parameterType="map" resultType="user">
         SELECT * FROM mybatis.user WHERE id = #{id} AND name = #{name}
     </select>
 
     <!-- 對象中的屬性，可以直接取出來 -->
-    <insert id="addUser" parameterType="com.morris.pojo.User">
+    <insert id="addUser" parameterType="user">
         INSERT INTO mybatis.user (id, name, pwd) VALUES (#{id}, #{name}, #{pwd})
     </insert>
 
@@ -28,7 +28,7 @@
         INSERT INTO mybatis.user (id, name, pwd) VALUES (#{userId}, #{userName}, #{userPwd})
     </insert>
 
-    <update id="updateUser" parameterType="com.morris.pojo.User">
+    <update id="updateUser" parameterType="user">
         UPDATE mybatis.user SET name = #{name}, pwd = #{pwd} WHERE id = #{id}
     </update>
     
@@ -36,7 +36,7 @@
         DELETE FROM mybatis.user WHERE id = #{id}
     </delete>
 
-    <select id="getUserLike" resultType="com.morris.pojo.User">
+    <select id="getUserLike" resultType="user">
         SELECT * FROM mybatis.user WHERE name LIKE #{name}
     </select>
 </mapper>
