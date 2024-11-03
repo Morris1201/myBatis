@@ -7,6 +7,10 @@
 
     <!-- 引入外部配置文件 -->
     <properties resource="db.properties"></properties>
+    
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
 
     <!-- 可以給實體類取別名 -->
     <typeAliases>

@@ -3,6 +3,7 @@ package com.morris.dao;
 import com.morris.pojo.User;
 import com.morris.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -11,11 +12,13 @@ import java.util.Map;
 
 public class UserDaoTest {
 
+    // 獲取 SqlSession 對象
+    SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+    Logger logger = Logger.getLogger(UserDaoTest.class);
+
     @Test
     public void test() {
-        // 獲取 SqlSession 對象
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             // 方法一:getMapper
             UserDao userDao = sqlSession.getMapper(UserDao.class);
@@ -37,8 +40,6 @@ public class UserDaoTest {
 
     @Test
     public void getUserById(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
             User user = userDao.getUserById(1);
@@ -53,8 +54,6 @@ public class UserDaoTest {
 
     @Test
     public void getUserByIdAndName(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
 
@@ -75,8 +74,6 @@ public class UserDaoTest {
     // 增刪改需要提交事務
     @Test
     public void addUser(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
             int res = userDao.addUser(new User(4, "人員4", "55665566"));
@@ -95,8 +92,6 @@ public class UserDaoTest {
 
     @Test
     public void addUser2(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
 
@@ -121,8 +116,6 @@ public class UserDaoTest {
 
     @Test
     public void updateUser(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
             int res = userDao.updateUser(new User(4, "修改人員4", "88998899"));
@@ -141,8 +134,6 @@ public class UserDaoTest {
 
     @Test
     public void deleteUser(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
             int res = userDao.deleteUser(4);
@@ -161,8 +152,6 @@ public class UserDaoTest {
 
     @Test
     public void getUserLike(){
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-
         try {
             UserDao userDao = sqlSession.getMapper(UserDao.class);
 
@@ -177,5 +166,12 @@ public class UserDaoTest {
             // 關閉 SqlSession
             sqlSession.close();
         }
+    }
+
+    @Test
+    public void testLog4j(){
+        logger.info("info:進入了testLog4j");
+        logger.debug("debug:進入了testLog4j");
+        logger.error("error:進入了testLog4j");
     }
 }
