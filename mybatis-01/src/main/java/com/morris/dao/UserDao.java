@@ -1,6 +1,7 @@
 package com.morris.dao;
 
 import com.morris.pojo.User;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +31,7 @@ public interface UserDao {
 
     // 分頁
     List<User> getUserByLimit(Map<String, Integer> map);
+
+    @Select("SELECT * FROM mybatis.user")
+    List<User> getUsers();
 }

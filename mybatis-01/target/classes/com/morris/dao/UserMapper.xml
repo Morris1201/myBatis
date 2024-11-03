@@ -36,7 +36,13 @@
         DELETE FROM mybatis.user WHERE id = #{id}
     </delete>
 
+    <!-- ¼Ò½k¬d¸ß -->
     <select id="getUserLike" resultType="user">
         SELECT * FROM mybatis.user WHERE name LIKE #{name}
+    </select>
+
+    <!-- ¤À­¶ -->
+    <select id="getUserByLimit" parameterType="map" resultType="user">
+        SELECT * FROM mybatis.user LIMIT #{startIndex}, #{pageSize}
     </select>
 </mapper>

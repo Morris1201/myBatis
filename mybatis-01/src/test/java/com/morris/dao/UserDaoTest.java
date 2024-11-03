@@ -215,6 +215,25 @@ public class UserDaoTest {
         }
     }
 
+    @Test
+    public void getUsers() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+
+            List<User> userList = userDao.getUsers();
+            for(User user : userList ) {
+                System.out.println(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
     /*
     @Test
     public void testLog4j(){
