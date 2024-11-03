@@ -27,4 +27,7 @@ public interface UserDao {
 
     // 模糊查詢
     List<User> getUserLike(String name);
+
+    // 分頁
+    List<User> getUserByLimit(Map<String, Integer> map);
 }

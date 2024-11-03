@@ -36,7 +36,13 @@
         DELETE FROM mybatis.user WHERE id = #{id}
     </delete>
 
+    <!-- 模糊查詢 -->
     <select id="getUserLike" resultType="user">
         SELECT * FROM mybatis.user WHERE name LIKE #{name}
+    </select>
+
+    <!-- 分頁 -->
+    <select id="getUserByLimit" parameterType="map" resultType="user">
+        SELECT * FROM mybatis.user LIMIT #{startIndex}, #{pageSize}
     </select>
 </mapper>
