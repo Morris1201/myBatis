@@ -234,6 +234,36 @@ public class UserDaoTest {
         }
     }
 
+    @Test
+    public void getUserById2() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            User user = userDao.getUserById2(1);
+            System.out.println(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void addUser3() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            userDao.addUser3(new User(6, "人員6", "6666666666"));
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
     /*
     @Test
     public void testLog4j(){

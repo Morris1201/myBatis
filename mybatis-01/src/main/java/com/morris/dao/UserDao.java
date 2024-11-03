@@ -1,6 +1,8 @@
 package com.morris.dao;
 
 import com.morris.pojo.User;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -34,4 +36,11 @@ public interface UserDao {
 
     @Select("SELECT * FROM mybatis.user")
     List<User> getUsers();
+
+    // 方法存在多個參數，所有的參數前面必須加上 @Param("id")註解
+    @Select("SELECT * FROM mybatis.user WHERE id = #{id}")
+    User getUserById2(@Param("id") int id);
+
+    @Insert("INSERT INTO user(id, name, pwd) VALUES (#{id}, #{name}, #{pwd})")
+    int addUser3(User user);
 }
