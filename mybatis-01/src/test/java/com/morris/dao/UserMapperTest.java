@@ -3,7 +3,6 @@ package com.morris.dao;
 import com.morris.pojo.User;
 import com.morris.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -11,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserDaoTest {
+public class UserMapperTest {
 
-    Logger logger = Logger.getLogger(UserDaoTest.class);
+    Logger logger = Logger.getLogger(UserMapperTest.class);
 
     @Test
     public void test() {
@@ -23,8 +22,8 @@ public class UserDaoTest {
 
         try {
             // 方法一:getMapper
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            List<User> userList = userDao.getUserList();
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            List<User> userList = userMapper.getUserList();
 
             // 方法二:
             // List<User> userList = sqlSession.selectList("com.morris.dao.UserDao.getUserList");
@@ -46,8 +45,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            User user = userDao.getUserById(1);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            User user = userMapper.getUserById(1);
             System.out.println(user);
         }catch (Exception e){
             e.printStackTrace();
@@ -63,13 +62,13 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             Map<String, Object> map = new HashMap<>();
             map.put("id", 1);
             map.put("name", "陳一");
 
-            User user = userDao.getUserByIdAndName(map);
+            User user = userMapper.getUserByIdAndName(map);
             System.out.println(user);
         }catch (Exception e){
             e.printStackTrace();
@@ -86,8 +85,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            int res = userDao.addUser(new User(4, "人員4", "55665566"));
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            int res = userMapper.addUser(new User(4, "人員4", "55665566"));
             if(res > 0) {
                 System.out.println("新增成功");
             }
@@ -107,14 +106,14 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             Map<String, Object> map = new HashMap<>();
             map.put("userId", 4);
             map.put("userName", "Map人員4");
             map.put("userPwd", 555555);
 
-            int res = userDao.addUser2(map);
+            int res = userMapper.addUser2(map);
             if(res > 0) {
                 System.out.println("新增成功");
             }
@@ -134,8 +133,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            int res = userDao.updateUser(new User(4, "修改人員4", "88998899"));
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            int res = userMapper.updateUser(new User(4, "修改人員4", "88998899"));
             if(res > 0) {
                 System.out.println("修改成功");
             }
@@ -155,8 +154,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            int res = userDao.deleteUser(4);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            int res = userMapper.deleteUser(4);
             if(res > 0) {
                 System.out.println("刪除成功");
             }
@@ -176,9 +175,9 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-            List<User> userList = userDao.getUserLike("%李%");
+            List<User> userList = userMapper.getUserLike("%李%");
             for (User user : userList) {
                 System.out.println(user);
             }
@@ -197,13 +196,13 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             HashMap<String, Integer> map = new HashMap<>();
             map.put("startIndex", 1);
             map.put("pageSize", 2);
 
-            List<User> userList = userDao.getUserByLimit(map);
+            List<User> userList = userMapper.getUserByLimit(map);
             for (User user : userList) {
                 System.out.println(user);
             }
@@ -220,9 +219,9 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-            List<User> userList = userDao.getUsers();
+            List<User> userList = userMapper.getUsers();
             for(User user : userList ) {
                 System.out.println(user);
             }
@@ -239,8 +238,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            User user = userDao.getUserById2(1);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            User user = userMapper.getUserById2(1);
             System.out.println(user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,8 +253,8 @@ public class UserDaoTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         try {
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            userDao.addUser3(new User(6, "人員6", "6666666666"));
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.addUser3(new User(6, "人員6", "6666666666"));
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
