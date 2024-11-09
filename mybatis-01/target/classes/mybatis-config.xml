@@ -31,7 +31,6 @@
 
     <!-- 每一個Mapper.xml都需要在Mybatis核心配置文件中註冊 -->
     <mappers>
-<!--        <mapper resource="com/morris/dao/UserMapper.xml"/>-->
         <package name="com.morris.dao"/>
     </mappers>
 

@@ -4,4 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.morris.dao.StudentMapper">
+
+    <!--
+     1.查詢所有學生訊息
+     2.根據查詢出來的學生的tid，尋找對應的老師
+     -->
+    <select id="getStudent" resultMap="StudentAndTeacher">
+        SELECT * FROM mybatis.student
+    </select>
+    <resultMap id="StudentAndTeacher" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!-- 複雜得屬性，需要單獨處理，對象: association 集合: collection -->
+        <association property="teacher" column="tid" javaType="Teacher" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getTeacher" resultType="Teacher">
+        SELECT * FROM mybatis.teacher WHERE id = #{id}
+    </select>
 </mapper>
