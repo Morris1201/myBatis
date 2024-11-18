@@ -20,6 +20,22 @@
     </resultMap>
 
     <select id="getTeacher" resultType="Teacher">
-        SELECT * FROM mybatis.teacher WHERE id = #{id}
+        SELECT * FROM mybatis.teacher WHERE id = #{tid}
     </select>
+
+    <!-- 按照結果嵌套處理 -->
+    <select id="getStudent2" resultMap="StudentAndTeacher2">
+        SELECT s.id sid, s.name sname, t.name tname
+        FROM student s, teacher t
+        WHERE s.tid = t.id
+    </select>
+
+    <resultMap id="StudentAndTeacher2" type="Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="Teacher">
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+
 </mapper>
