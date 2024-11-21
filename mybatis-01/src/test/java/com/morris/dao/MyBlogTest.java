@@ -78,4 +78,52 @@ public class MyBlogTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void queryBlogChoose() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
+
+            HashMap map = new HashMap();
+            map.put("title", "哈利波特(7)死神的聖物");
+//            map.put("author", "J.K.羅琳");
+            map.put("price", 999);
+
+            List<Blog> blogs = blogMapper.queryBlogChoose(map);
+
+            for(Blog blog : blogs) {
+                System.out.println(blog);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void updateBlog() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
+
+            HashMap map = new HashMap();
+            map.put("id", "6fc5667bdf8c4b12b14a75e24feeb014");
+            map.put("title", "深刻認識一個人2");
+//            map.put("author", "大衛．布魯克斯");
+            map.put("price", 999);
+
+            blogMapper.updateBlog(map);
+
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
 }
