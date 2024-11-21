@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.morris.dao.BlogMapper">
+
+    <insert id="addBlog" parameterType="blog">
+        INSERT INTO mybatis.blog(id, title, author, create_time, price)
+            VALUE (#{id}, #{title}, #{author}, #{createTime}, #{price})
+    </insert>
+
+    <select id="queryBlogIf" parameterType="map" resultType="Blog">
+        SELECT * FROM mybatis.blog WHERE 1 = 1
+        <if test="title != null">
+            AND title = #{title}
+        </if>
+        <if test="author != null">
+            AND author = #{author}
+        </if>
+    </select>
+</mapper>
