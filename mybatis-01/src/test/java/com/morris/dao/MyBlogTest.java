@@ -5,6 +5,7 @@ import com.morris.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -120,6 +121,34 @@ public class MyBlogTest {
             blogMapper.updateBlog(map);
 
             sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void queryBlogForeach() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        try {
+            BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
+
+            HashMap map = new HashMap();
+
+            ArrayList<Integer> ids = new ArrayList<>();
+            ids.add(5);
+            ids.add(6);
+            ids.add(7);
+
+            map.put("ids", ids);
+            List<Blog> blogs = blogMapper.queryBlogForeach(map);
+
+            for(Blog blog : blogs) {
+                System.out.println(blog);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

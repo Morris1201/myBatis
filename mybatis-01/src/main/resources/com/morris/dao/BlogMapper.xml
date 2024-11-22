@@ -50,6 +50,18 @@
         WHERE id = #{id}
     </update>
 
+    <!--
+        select * from mybatis.blog where 1 = 1 and (id = 5 or id = 6 or id = 7)
+    -->
+    <select id="queryBlogForeach" parameterType="map" resultType="Blog">
+        SELECT * FROM mybatis.blog
+        <where>
+            <foreach collection="ids" item="id" open="(" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+
     <sql id="if-title-author">
         <if test="title != null">
             title = #{title}

@@ -16,4 +16,7 @@ public interface BlogMapper {
     List<Blog> queryBlogIf(Map map);
 
     List<Blog> queryBlogChoose(Map map);
+
+    // 查詢id為5、6、7博客
+    List<Blog> queryBlogForeach(Map map);
 }
