@@ -13,12 +13,7 @@
     <select id="queryBlogIf" parameterType="map" resultType="Blog">
         SELECT * FROM mybatis.blog
         <where>
-            <if test="title != null">
-                AND title = #{title}
-            </if>
-            <if test="author != null">
-                AND author = #{author}
-            </if>
+            <include refid="if-title-author"></include>
         </where>
     </select>
     
@@ -54,4 +49,13 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title}
+        </if>
+        <if test="author != null">
+            AND author = #{author}
+        </if>
+    </sql>
 </mapper>
