@@ -5,6 +5,13 @@
 <!-- namespace=綁定一個對應的Dao/Mapper介面 -->
 <mapper namespace="com.morris.dao.UserMapper">
 
+    <!-- 在當前Mapper.xml中使用二級緩存 -->
+    <cache eviction="FIFO"
+           flushInterval="60000"
+           size="512"
+           readOnly="true"
+    />
+
     <!-- select查詢語句 -->
     <select id="getUserList" resultType="user">
         SELECT * FROM mybatis.user
