@@ -6,11 +6,14 @@
 <mapper namespace="com.morris.dao.UserMapper">
 
     <!-- 在當前Mapper.xml中使用二級緩存 -->
+    <!--
     <cache eviction="FIFO"
            flushInterval="60000"
            size="512"
            readOnly="true"
     />
+    -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
     <!-- select查詢語句 -->
     <select id="getUserList" resultType="user">
